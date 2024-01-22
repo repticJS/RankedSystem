@@ -1,0 +1,16 @@
+{
+    "discordId": "",
+    "LastQueued": "",
+    "TwoMans": {
+        "GamesPlayed": 0,
+        "Wins": 0
+    },
+    "FourMans": {
+        "GamesPlayed": 0,
+        "Wins": 0
+    },
+    "SixMans": {
+        "GamesPlayed": 0,
+        "Wins": 0
+    }
+}

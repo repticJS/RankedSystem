@@ -1,0 +1,22 @@
+{
+    "guildId": "",
+    "Logs": [],
+    "TwoMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": []
+    },
+    "FourMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": []
+    },
+    "SixMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": []
+    }
+}
