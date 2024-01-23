@@ -1,0 +1,47 @@
+{
+    "/Setup": {
+        "Type": "SlashCommand",
+        "Params": [
+            {
+                "Name": "Category",
+                "Description": "The category you want the ranked system to be handled in!",
+                "Type": "CHANNEL",
+                "Required": false
+            },
+            {
+                "Name": "Channel",
+                "Description": "Staff Channel - Where you will manage the ranked system!",
+                "Type": "CHANNEL",
+                "Required": false
+            }
+        ],
+        "Description": "This will start the setup process",
+        "Steps": [
+            {
+                "Step": 1,
+                "Description": "Will Create / Select Category, and save it in the database."
+            },
+            {
+                "Step": 2,
+                "Description": "Will Create / Select Channel, sand save it to the database."
+            },
+            {
+                "Step": 3,
+                "Description": "Will send setup embed to staff channel",
+                "Embed": {
+                    "Name": "Ranked System | Setup",
+                    "Fields": [
+                        {
+                            "Name": "GameModes",
+                            "Value": "2Mans: Disabled\n4Mans: Disabled\n6Mans: Disabled"
+                        },
+                        {
+                            "Name": "Other",
+                            "Value": "VoiceChannels: Disabled\nResultsChannel: Disabled"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
