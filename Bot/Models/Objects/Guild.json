@@ -1,0 +1,33 @@
+{
+    "guildId": "",
+    "Logs": [],
+    "Admin": {
+        "Channel": "",
+        "Staff": []
+    },
+    "TwoMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": [],
+        "Status": false
+    },
+    "FourMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": [],
+        "Status": false
+    },
+    "SixMans": {
+        "ResultsChannel": "",
+        "PanelChannel": "",
+        "Colour": "",
+        "Queue": [],
+        "Status": false
+    },
+    "Setup": {
+        "Message": "",
+        "Channel": ""
+    }
+}
