@@ -29,7 +29,17 @@
                 "Step": 3,
                 "Description": "Will send setup embed to staff channel",
                 "Embed": {
-                    "Name": "Ranked System | Setup"
+                    "Name": "Ranked System | Setup",
+                    "Fields": [
+                        {
+                            "Name": "GameModes",
+                            "Value": "2Mans: Disabled\n4Mans: Disabled\n6Mans: Disabled"
+                        },
+                        {
+                            "Name": "Other",
+                            "Value": "VoiceChannels: Disabled\nResultsChannel: Disabled"
+                        }
+                    ]
                 }
             }
         ]
