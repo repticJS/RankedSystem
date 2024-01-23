@@ -21,39 +21,7 @@ async function sendEmbed(guildId) {
         })}`}
 	)
 
-    const row = new MessageActionRow()
-    .addComponents(
-        new MessageButton()
-            .setCustomId(data.TwoMans.Status === true ? "2Mans_ClearQ" : "2Mans_Setup")
-            .setLabel(data.TwoMans.Status === true ? "2Mans | ClearQ" : "2Mans Setup")
-            .setStyle('SECONDARY'),
-        new MessageButton()
-            .setCustomId(data.FourMans.Status === true ? "4Mans_ClearQ" : "4Mans_Setup")
-            .setLabel(data.FourMans.Status === true ? "4Mans | ClearQ" : "4Mans Setup")
-            .setStyle('SECONDARY'),
-        new MessageButton()
-            .setCustomId(data.SixMans.Status === true ? "6Mans_ClearQ" : "6Mans_Setup")
-            .setLabel(data.SixMans.Status === true ? "6Mans | ClearQ" : "6Mans Setup")
-            .setStyle('SECONDARY')
-    );
-
-    const row1 = new MessageActionRow()
-    .addComponents(
-        new MessageButton() 
-            .setCustomId('Admin_ErrorHandling')
-            .setLabel("Error Menu")
-            .setStyle('SECONDARY'),
-        new MessageButton()
-            .setCustomId('Admin_StaffAdd')
-            .setLabel("Add Staff")
-            .setStyle('SECONDARY'),
-        new MessageButton()
-            .setCustomId('Admin_RemoveAdd')
-            .setLabel("Remove Staff")
-            .setStyle('SECONDARY')
-    );
-
-    Msg.edit({ embeds: [embed], content: 'Loaded!', components: [row, row1] })
+    Msg.edit({ embeds: [embed], content: 'Loaded!' })
 
 }
 

@@ -7,8 +7,14 @@ module.exports = {
     description: 'Start Setup Of Ranked System',
     options: [
         {
-            name: 'channel',
-            description: 'Admin Channel',
+            name: 'category',
+            description: 'The Category you want the ranked system to be handled in!',
+            type: "CHANNEL",
+            required: true
+        },
+        {
+            name: "channel",
+            description: "Staff Channel - Where you will manage the ranked system!",
             type: "CHANNEL",
             required: true
         }
@@ -22,56 +28,14 @@ module.exports = {
     run: async(client, interaction, args) => {
 
     const Channel = interaction.options.getChannel('channel');
-    const Msg = await Channel.send("Loading ...")
+    const Category = interaction.options.getChannel('category');
     
     if(interaction.guild.ownerId != interaction.member.id) return interaction.followUp("Only the server owner can run this command!")
+
     
-    Schema.create({
-        ID: interaction.guild.id,
-        Logs: [
-            {
-                Timestamp: Date.now(),
-                Level: "INFO",
-                Message: "Created Guild Data"
-            },
-            {
-                Timestamp: Date.now(),
-                Level: "INFO",
-                Message: "Linked Setup Message"
-            }
-        ],
-        TwoMans: {
-            ResultsChannel: "",
-            PanelChannel: "",
-            Colour: "",
-            Queue: [],
-            Status: false
-        },
-        FourMans: {
-            ResultsChannel: "",
-            PanelChannel: "",
-            Colour: "",
-            Queue: [],
-            Status: false
-        },
-        SixMans: {
-            ResultsChannel: "",
-            PanelChannel: "",
-            Colour: "",
-            Queue: [],
-            Status: false
-        },
-        Setup: {
-            Message: Msg.id,
-            Channel: Channel.id
-        },
-        Admin: {
-            Channel: Channel.id,
-            Staff: [`${interaction.member.id}`]
-        }
-    }).then(() => {
-        sendEmbed(interaction.guild.id)
-    })
+
+    
+    
 
     }
 }
