@@ -32,10 +32,22 @@ module.exports = {
     
     if(interaction.guild.ownerId != interaction.member.id) return interaction.followUp("Only the server owner can run this command!")
 
-    
+    var Category_Main = "";
+    if(Category) { Category_Main = Category } else {
+        // Create Category
+    }
 
-    
-    
+    var Channel_Main = "";
+    if(Channel) { Channel_Main = Channel } else {
+        // Create Channel -> Inside of category
+    }
+
+    // Loging Category and Channel
+    console.log(Category_Main, Channel_Main)
+
+    // Send Loading Message + Create Data
+    Channel_Main.send("Loading ...")
+    // Create Data
 
     }
 }
