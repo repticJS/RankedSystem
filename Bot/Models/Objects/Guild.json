@@ -1,5 +1,5 @@
 {
-    "guildId": "",
+    "ID": "",
     "Logs": [],
     "Admin": {
         "Channel": "",
@@ -25,9 +25,5 @@
         "Colour": "",
         "Queue": [],
         "Status": false
-    },
-    "Setup": {
-        "Message": "",
-        "Channel": ""
     }
 }

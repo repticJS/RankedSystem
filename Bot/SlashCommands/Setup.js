@@ -1,6 +1,6 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const Schema = require('../Models/Guild');
-const { sendEmbed } = require('../utils/Setup');
+const { sendAdminPanel } = require('../utils/Admin');
 
 module.exports = {
     name: 'setup',
@@ -42,12 +42,52 @@ module.exports = {
         // Create Channel -> Inside of category
     }
 
-    // Loging Category and Channel
+    // Logging Category and Channel
     console.log(Category_Main, Channel_Main)
 
     // Send Loading Message + Create Data
-    Channel_Main.send("Loading ...")
+    const PanelMsg = await Channel_Main.send("Loading ...")
     // Create Data
+
+    Schema.create({
+        ID: interaction.guild.id,
+        Staff: {
+            Channel: Channel_Main.id,
+            PanelMsg: PanelMsg.id,
+            Users: [`${interaction.member.id}`],
+        },
+        Config: {
+            ResultsChannel: "",
+            QueueingEnabled: false,
+            BannedPlayers: [],
+            PremiumKey: ""
+        },
+        TwoMans: {
+            Status: false,
+            Channel: "",
+            Color: "#00EAFC",
+            Queue: [],
+            Lobby: []
+        },
+        FourMans: {
+            Status: false,
+            Channel: "",
+            Color: "#9B08F2",
+            Queue: [],
+            Lobby: []
+        },
+        SixMans: {
+            Status: false,
+            Channel: "",
+            Color: "#F20818",
+            Queue: [],
+            Lobby: []
+        }
+    }).then(() => {
+        sendAdminPanel(interaction.guild.id)
+    })
+
+
 
     }
 }
