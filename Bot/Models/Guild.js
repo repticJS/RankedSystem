@@ -5,12 +5,6 @@ const Schema = new mongoose.Schema({
     ID: {
         type: String
     },
-    Logs: {
-        type: Array
-    },
-    Admin: {
-        type: Object
-    },
     TwoMans: {
         type: Object
     },
@@ -20,7 +14,10 @@ const Schema = new mongoose.Schema({
     SixMans: {
         type: Object
     },
-    Setup: {
+    Config: {
+        type: Object
+    },
+    Staff: {
         type: Object
     }
 
