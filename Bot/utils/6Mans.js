@@ -8,15 +8,15 @@ const randomWords = require('random-words');
 const { sort } = require ("fast-sort");
 const { sendAdminPanel } = require('./Admin');
 
-async function sendEmbed_2Mans(guildID) {
+async function sendEmbed_6Mans(guildID) {
 
     const Data = await Schema.findOne({ ID: guildID });
-    const Queue = Data.TwoMans.Queue
-    const Lobbys = Data.TwoMans.Lobby
+    const Queue = Data.SixMans.Queue
+    const Lobbys = Data.SixMans.Lobby
 
     const embed = new MessageEmbed()
-    .setColor(`${Data.TwoMans.Color}`)
-    .setTitle('- Ranked System | 2Mans -')
+    .setColor(`${Data.SixMans.Color}`)
+    .setTitle('- Ranked System | 6Mans -')
     .setFooter({ text: 'Powered by repticJS', iconURL: 'https://imgur.com/co7WQ8L.png' });
 
     const maped = Queue.map((item) => {
@@ -96,31 +96,31 @@ async function sendEmbed_2Mans(guildID) {
     const row1 = new MessageActionRow()
     .addComponents(
         new MessageButton()
-            .setCustomId('2Mans_YourStats')
+            .setCustomId('YourStats')
             .setLabel("Your Stats")
             .setStyle('SECONDARY'),
             new MessageButton()
-            .setURL('https://risingphoenix.uk/RankedSystem?Option=2Mans')
+            .setURL('https://risingphoenix.uk/RankedSystem?Option=6Mans')
         	.setDisabled(false)
             .setLabel("Leaderboard")
             .setStyle('LINK')
     );
 
     const guild = client.guilds.cache.get(guildID);
-    const Channel = await guild.channels.cache.get(Data.TwoMans.Channel);
+    const Channel = await guild.channels.cache.get(Data.SixMans.Channel);
 
-    const Msg = await Channel.messages.fetch(Data.TwoMans.Message);
+    const Msg = await Channel.messages.fetch(Data.SixMans.Message);
     Msg.edit({ embeds: [embed], components: [row, row1], content: " " })
 
 }
 
-async function Setup_2Mans(guildID) {
+async function Setup_6Mans(guildID) {
 
     const Data = await Schema.findOne({ ID: guildID });
     const guild = client.guilds.cache.get(guildID);
     const category = guild.channels.cache.get(Data.Config.Category)
     
-    const channel = await category.createChannel(`🔵┃2mans`, {
+    const channel = await category.createChannel(`🔴┃6mans`, {
         type: "GUILD_TEXT",
         permissionOverwrites: [{
             id: guild.id,
@@ -133,19 +133,19 @@ async function Setup_2Mans(guildID) {
    Schema.findOneAndUpdate({
     ID: guildID
    }, {
-    TwoMans: {
+    SixMans: {
         Status: true,
         Channel: channel.id,
         Message: MSG.id,
         Queue: [],
         Lobby: [],
-        Color: "#00EAFC"
+        Color: "#F20818"
     }
    }).then(() => {
-        sendEmbed_2Mans(guildID)
+        sendEmbed_6Mans(guildID)
         sendAdminPanel(guildID)
    })
 
 }
 
-module.exports = { sendEmbed_2Mans, Setup_2Mans };
+module.exports = { sendEmbed_6Mans, Setup_6Mans };

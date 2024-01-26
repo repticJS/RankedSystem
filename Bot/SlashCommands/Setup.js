@@ -85,21 +85,24 @@ module.exports = {
             Channel: "",
             Color: "#00EAFC",
             Queue: [],
-            Lobby: []
+            Lobby: [],
+            Message: ""
         },
         FourMans: {
             Status: false,
             Channel: "",
             Color: "#9B08F2",
             Queue: [],
-            Lobby: []
+            Lobby: [],
+            Message: ""
         },
         SixMans: {
             Status: false,
             Channel: "",
             Color: "#F20818",
             Queue: [],
-            Lobby: []
+            Lobby: [],
+            Message: ""
         }
     }).then(async() => {
         
