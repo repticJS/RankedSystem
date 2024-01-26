@@ -101,7 +101,7 @@ async function sendEmbed_6Mans(guildID) {
             .setStyle('SECONDARY'),
             new MessageButton()
             .setURL('https://risingphoenix.uk/RankedSystem?Option=6Mans')
-        	.setDisabled(false)
+        	.setDisabled(true)
             .setLabel("Leaderboard")
             .setStyle('LINK')
     );
