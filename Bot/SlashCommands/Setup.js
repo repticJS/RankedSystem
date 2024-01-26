@@ -59,7 +59,7 @@ module.exports = {
     console.log(Category_Main, Channel_Main)
 
     // Send Loading Message + Create Data
-    const PanelMsg = await Channel_Main.send("Loading ....")
+    const PanelMsg = await Channel_Main.send("Loading ...")
     
     const H1 = await interaction.channel.send("✅ -> Start Up Successful.")
     const H2 = await interaction.channel.send("✅ -> Saving Data!")
