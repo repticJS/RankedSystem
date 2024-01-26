@@ -1,29 +1,39 @@
 {
     "ID": "",
-    "Logs": [],
-    "Admin": {
-        "Channel": "",
-        "Staff": []
+    "Staff": {
+      "Channel": "",
+      "PanelMsg": "",
+      "Users": []
+    },
+    "Config": {
+      "ResultsChannel": "",
+      "QueueingEnabled": false,
+      "BannedPlayers": [],
+      "PremiumKey": "",
+      "Category": ""
     },
     "TwoMans": {
-        "ResultsChannel": "",
-        "PanelChannel": "",
-        "Colour": "",
-        "Queue": [],
-        "Status": false
+      "Status": false,
+      "Channel": "",
+      "Color": "#00EAFC",
+      "Queue": [],
+      "Lobby": [],
+      "Message": ""
     },
     "FourMans": {
-        "ResultsChannel": "",
-        "PanelChannel": "",
-        "Colour": "",
-        "Queue": [],
-        "Status": false
+      "Status": false,
+      "Channel": "",
+      "Color": "#9B08F2",
+      "Queue": [],
+      "Lobby": [],
+      "Message": ""
     },
     "SixMans": {
-        "ResultsChannel": "",
-        "PanelChannel": "",
-        "Colour": "",
-        "Queue": [],
-        "Status": false
+      "Status": false,
+      "Channel": "",
+      "Color": "#F20818",
+      "Queue": [],
+      "Lobby": [],
+      "Message": ""
     }
-}
+  }
