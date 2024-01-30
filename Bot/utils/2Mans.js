@@ -21,12 +21,12 @@ async function sendEmbed_2Mans(guildID) {
 
     const maped = Queue.map((item) => {
 
-        return `<@${item}>` 
+        return `<@${item.discordId}>` 
 
     }).join("\n")
 
     const maped1 = Lobbys.map((item) => {
-        return `<#${item.channelId}>`
+        return `<#${item.Channel}>`
     }).join("\n")
 
     if(Queue.length === 0) {
@@ -97,6 +97,7 @@ async function sendEmbed_2Mans(guildID) {
     .addComponents(
         new MessageButton()
             .setCustomId('2Mans_YourStats')
+            .setDisabled(true)
             .setLabel("Your Stats")
             .setStyle('SECONDARY'),
             new MessageButton()

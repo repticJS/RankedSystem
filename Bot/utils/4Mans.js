@@ -21,7 +21,7 @@ async function sendEmbed_4Mans(guildID) {
 
     const maped = Queue.map((item) => {
 
-        return `<@${item}>` 
+        return `<@${item.discordId}>` 
 
     }).join("\n")
 
@@ -97,6 +97,7 @@ async function sendEmbed_4Mans(guildID) {
     .addComponents(
         new MessageButton()
             .setCustomId('YourStats')
+            .setDisabled(true)
             .setLabel("Your Stats")
             .setStyle('SECONDARY'),
             new MessageButton()
