@@ -219,13 +219,61 @@ async function StartLobby_Random(guildID, ChannelID) {
         })
     }
 
-    StartLobby_Random(Message, Lobby, Team1, Team2)
+    sendLobbyReady(Message, Lobby, Team1, Team2)
     
 
 }
 
 async function sendLobbyReady(Message, Data, Team1, Team2) {
 
+    const Embed1 = new MessageEmbed()
+    .setColor("BLACK")
+    .setTitle(`Lobby ${Data.ID.toLowerCase()} Panel!`)
+    .setDescription(`Information for the private match:\nName: **${Data.Name}**\nPassword: **${Data.Password}**\n\n<@${Data.CreatesTheLobby}> Creates the lobby!`)
+
+    const Team1 = new MessageEmbed()
+    .setColor("BLUE")
+    .setTitle("Blue Team")
+    .setDescription(`${Data.Team1.map((player) => {
+        return `<@${player.discordId}>`
+    })}`)
+
+    const Team2 = new MessageEmbed()
+    .setColor("ORANGE")
+    .setTitle("Orange Team")
+    .setDescription(`${Data.Team2.map((player) => {
+        return `<@${player.discordId}>`
+    })}`)
+
+    // Buttons -> Report, Cancel, VoiceChannels, Substitute
+
+    const MainButtons = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+            .setCustomId('ReportMatch')
+            .setLabel("Report Match")
+            .setStyle('PRIMARY'),
+        new MessageButton()
+            .setCustomId('CancelMatch')
+            .setLabel("Cancel")
+            .setStyle('DANGER')
+    );
+
+    const OptionalButtons = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+            .setCustomId('Team1_VoiceChannels')
+            .setLabel("Team 1 | Voice Channel")
+            .setDisabled(true)
+            .setStyle('PRIMARY'),
+        new MessageButton()
+            .setCustomId('Team2_VoiceChannels')
+            .setLabel("Team 2 | Voice Channel")
+            .setDisabled(true)
+            .setStyle('DANGER')
+    );
+
+    Message.edit({ embeds: [Embed1, Team1, Team2], components: [MainButtons, OptionalButtons] })
     // Send Teams embed
     // And new Buttons
 
