@@ -24,6 +24,20 @@ async function ToggleQStatus(interaction, Status, Data) {
 
 }
 
+async function addPlayersToLobby(channel, players) {
+
+    await players.forEach((player) => {
+        channel.permissionOverwrites.edit(player.discordId, { VIEW_CHANNEL: true, SEND_MESSAGES: true } )
+        console.log(`Added ${player.discordId} to lobby channel!`)
+    })
+
+    console.log('Added all players to lobby channel');
+    channel.send(`${players.map((player) => {
+        return `<@${player.discordId}>`
+    })}`)
+
+    // Send Players A DM
+}
 async function sendLobbyEmbed(Msg, Data, channel, interaction) {
 
     const panelEmbed = new MessageEmbed()
@@ -53,17 +67,20 @@ async function sendLobbyEmbed(Msg, Data, channel, interaction) {
     Msg.edit({ embeds: [panelEmbed], content: " ", components: [row] })
 
     // Add Players to Channel -> Needs Doing
+    addPlayersToLobby(channel, Data.Players)
 
     if(Data.GameMode === "TwoMans") {
         // Force Vote -> "Random"
-        channel.send("Force Skipping Vote. Please Wait!")
+        channel.send("Force Skipping Vote. Please Wait!").then((msg) => {
+            setTimeout(() => {
+                try { msg.delete() } catch (error) { console.log(error) }
+            }, 5000)
+        })
         setTimeout(() => {
             StartLobby_Random(interaction.guild.id, Data.Channel)
         }, 2000)
     } else {
-        channel.send(`${Data.Players.map((player) => {
-            return `<@${player.discordId}>`
-        })} Please Vote!`)
+        return;
     }
 
 }
@@ -133,6 +150,7 @@ async function CreateLobby(interaction, GameMode, Queue) {
 
     // Sending Lobby Embed
     sendLobbyEmbed(Msg, LobbyData, channel, interaction)
+    ToggleQStatus(interaction, false, Data)
 
     // Send Lobby Embeds Into Channel
     // As Well as Vote System for "Captains, Balanced or Random"
@@ -179,7 +197,7 @@ async function StartLobby_Random(guildID, ChannelID) {
 
     // Updating Lobby Object
     if(Lobby.GameMode === "TwoMans") {
-        const NewLobbyArrays = await updateObjectById(TwoMansLobbys, Lobby.ID, { Team1: Team1, Team2: Team2 });
+        const NewLobbyArrays = await updateObjectById(TwoMansLobbys, Lobby.ID, { Team1: Team1, Team2: Team2 } );
         
         Schema.findOneAndUpdate({
             ID: guildID
@@ -231,17 +249,17 @@ async function sendLobbyReady(Message, Data, Team1, Team2) {
     .setTitle(`Lobby ${Data.ID.toLowerCase()} Panel!`)
     .setDescription(`Information for the private match:\nName: **${Data.Name}**\nPassword: **${Data.Password}**\n\n<@${Data.CreatesTheLobby}> Creates the lobby!`)
 
-    const Team1 = new MessageEmbed()
+    const Team1Embed = new MessageEmbed()
     .setColor("BLUE")
     .setTitle("Blue Team")
-    .setDescription(`${Data.Team1.map((player) => {
+    .setDescription(`${Team1.map((player) => {
         return `<@${player.discordId}>`
     })}`)
 
-    const Team2 = new MessageEmbed()
+    const Team2Embed = new MessageEmbed()
     .setColor("ORANGE")
     .setTitle("Orange Team")
-    .setDescription(`${Data.Team2.map((player) => {
+    .setDescription(`${Team2.map((player) => {
         return `<@${player.discordId}>`
     })}`)
 
@@ -262,21 +280,13 @@ async function sendLobbyReady(Message, Data, Team1, Team2) {
     const OptionalButtons = new MessageActionRow()
     .addComponents(
         new MessageButton()
-            .setCustomId('Team1_VoiceChannels')
-            .setLabel("Team 1 | Voice Channel")
+            .setCustomId('VoiceChannels')
+            .setLabel("Voice Channels")
             .setDisabled(true)
-            .setStyle('PRIMARY'),
-        new MessageButton()
-            .setCustomId('Team2_VoiceChannels')
-            .setLabel("Team 2 | Voice Channel")
-            .setDisabled(true)
-            .setStyle('DANGER')
+            .setStyle('SUCCESS')
     );
 
-    Message.edit({ embeds: [Embed1, Team1, Team2], components: [MainButtons, OptionalButtons] })
-    // Send Teams embed
-    // And new Buttons
-
+    Message.edit({ embeds: [Team1Embed, Team2Embed, Embed1], components: [MainButtons, OptionalButtons] })
 }
 
 module.exports = { CreateLobby, StartLobby_Random };
