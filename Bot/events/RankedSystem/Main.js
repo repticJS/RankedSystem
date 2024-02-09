@@ -5,6 +5,7 @@ const { JoinQueue, LeaveQueue } = require('../../utils/PanelHandler');
 const { sendEmbed_2Mans } = require('../../utils/2Mans');
 const { sendEmbed_4Mans } = require('../../utils/4Mans');
 const { sendEmbed_6Mans } = require('../../utils/6Mans');
+const { checkPlayer } = require('../../utils/HandlePlayer');
 
 client.on("interactionCreate", async(interaction) => {
 
@@ -17,7 +18,12 @@ client.on("interactionCreate", async(interaction) => {
     
     if(GameMode === "") return;
 
-    if(interaction.customId === "Queue") { JoinQueue(interaction, GameMode) } 
+    if(interaction.customId === "Queue") { 
+
+        const check = await checkPlayer(interaction, GameMode)
+        JoinQueue(interaction, GameMode)
+
+    } 
     else if(interaction.customId === "Leave") { LeaveQueue(interaction, GameMode) }
     else if(interaction.customId === "Refresh") { 
         sendEmbed_2Mans(interaction.guild.id)
