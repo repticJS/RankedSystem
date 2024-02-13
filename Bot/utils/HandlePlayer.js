@@ -42,6 +42,12 @@ async function checkPlayer_Lobbys(GuildData, discordId) {
     return isPlayerFound
 }
 
+async function checkPlayer_Queue(GuildData, discordId, GameMode) {
+
+
+
+}
+
 async function checkPlayer(interaction, GameMode) {
 
     // True = Can't Q
@@ -53,9 +59,15 @@ async function checkPlayer(interaction, GameMode) {
     if(!GuildData) return true;
 
     // Check If they are in a lobby
-    const checkQ = await checkPlayer_Lobbys(GuildData, interaction.member.id)
+    const checkLobbys = await checkPlayer_Lobbys(GuildData, interaction.member.id)
+    console.log(checkLobbys)
+    if(checkLobbys === true) return true
+    
+
+    // Check if they are already in the queue
+    const checkQ = await checkPlayer_Queue(GuildData, interaction.member.id, GameMode);
     console.log(checkQ)
-    return checkQ
+    if(checkQ === true) return true
 
 }
 
